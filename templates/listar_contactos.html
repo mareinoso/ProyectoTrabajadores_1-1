@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>Lista de Contactos</h1>
+  <a href="{% url 'agregar_contacto' %}" class="btn btn-primary btn-lg mt-3 mb-3">Agregar Contacto</a>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Rut</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Teléfono</th>
+        <th scope="col">Acciones</th> 
+      </tr>
+    </thead>
+    <tbody>
+      {% for contacto in contactos %}
+        <tr>
+          <td>{{ contacto.rut_contacto }}</td>
+          <td>{{ contacto.nombre }} {{ contacto.apellido }}</td>
+          <td>{{ contacto.telefono}}</td>
+          <td>
+            <a href="{% url 'editar_contacto' rut_contacto=contacto.rut_contacto %}">
+                <img src="{% static 'img/Editar.png' %}" alt="editar" style= "width: 20px">
+            </a>
+            <a href="{% url 'remover_contacto' rut_contacto=contacto.rut_contacto %}" onclick="return confirm('¿Estás seguro de eliminar?');">
+                <img src="{% static 'img/Eliminar.png' %}" alt="eliminar" style="width: 20px">
+            </a>
+          </td>   
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

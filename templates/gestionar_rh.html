@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>Lista de empleados</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Rut</th>
+        <th scope="col">Trabajador</th>
+        <th scope="col">Cargas</th>
+        <th scope="col">Contactos Emergencia</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for trabajador in trabajadores %}
+        <tr>
+        <td>{{ trabajador.rut_trabajador }}</td>
+        <td>{{ trabajador.nombre }} {{ trabajador.apellido }}</td>
+      <td>          
+          {% for carga in listaCargas %}
+          {% if trabajador.rut_trabajador == carga.rut_trabajador.rut_trabajador %}
+          <div class="container">
+            <div class="row">
+              <div class="col-auto">
+                <p style=" margin:0 ">{{ carga.rut_carga.nombre }} {{ carga.rut_carga.apellido }} {{ carga.parentesco }}</p>
+              </div>
+              <div class="col-auto" >
+                <a href="{% url 'editar_lista_carga' id_lista_cargas=carga.id_lista_cargas %}"> <img src="{% static 'img/Editar.png' %}" alt="editar" style= "width: 20px"> </a>
+              </div>
+              <div class="col-auto">
+                <a href="{% url 'remover_lista_carga' id_lista_cargas=carga.id_lista_cargas %}" onclick="return confirm('¿Estás seguro de eliminar?');"> <img src="{% static 'img/Eliminar.png' %}" alt="eliminar" style="width: 20px"> </a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          <a class="btn btn-primary" href="{% url 'agregar_lista_carga' %}">+</a>
+        </td>
+        <td>          
+          {% for contacto in listaContactos %}
+          {% if trabajador.rut_trabajador == contacto.rut_trabajador.rut_trabajador %}
+          <div class="container">
+            <div class="row">
+              <div class="col-auto">
+                <p style=" margin:0 ">{{ contacto.rut_carga.nombre }} {{ contacto.rut_contacto.apellido }} {{ contacto.parentesco }}</p>
+              </div>
+              <div class="col-auto" >
+                <a href="{% url 'editar_lista_contacto' id_lista_contactos=contacto.id_lista_contactos %}"> <img src="{% static 'img/Editar.png' %}" alt="editar" style= "width: 20px"> </a>
+              </div>
+              <div class="col-auto">
+                <a href="{% url 'remover_lista_contacto' id_lista_contactos=contacto.id_lista_contactos %}" onclick="return confirm('¿Estás seguro de eliminar?');"> <img src="{% static 'img/Eliminar.png' %}" alt="eliminar" style="width: 20px"> </a>
+              </div>
+            </div>
+          </div>
+          {% endif %}
+          {% endfor %}
+          <a class="btn btn-primary" href="{% url 'agregar_lista_contacto' %}">+</a>
+        </td>
+
+        {% endfor %}
+        </tr>
+    </tbody>
+  </table>
+{% endblock %}

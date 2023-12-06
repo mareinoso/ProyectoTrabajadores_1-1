@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container-fluid">
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+                <h1 class="display-4">Ferretería Eficaz</h1>
+                <form class="d-flex" action="{% url 'buscar_empleado' %}" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Buscar Empleado" aria-label="Buscar Empleado" name="q">
+                    <button class="btn btn-outline-success" type="submit">Buscar</button>
+                </form>
+            </main>
+    </div>
+{% endblock %}

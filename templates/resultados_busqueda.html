@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <h1>Resultados de búsqueda</h1>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col">Rut</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Departamento</th>
+        <th scope="col">Cargo</th>
+        <th scope="col">Telefono</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for empleado in empleados %}
+        <tr>
+            <td>{{ empleado.rut_trabajador }}</td>
+            <td>{{ empleado.nombre_trabajador }}</td>
+            <td>{{ empleado.departamento }}</td>
+            <td>{{ empleado.cargo }}</td>
+            <td>{{ empleado.telefono_trabajador }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

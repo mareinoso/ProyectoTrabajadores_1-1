@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+  <div class="container custom-container ">
+      <div class="text-center">
+          <h1 class="form-title"> Agregar Empleado</h1>
+      </div>
+      <div class="row justify-content-center">
+          <div class="col-md-8 mx-auto">
+              <form action="" method="POST">
+                  {% csrf_token %}
+                  <!-- Entrega el formulario -->
+                  {{ form.as_p }} 
+                  <button class="btn btn-success btn-block my-3" type="submit" value="submit">Ingresar Empleado</button>
+                  <a href="{% url 'listar_empleados' %}" class=" btn btn-secondary">Volver</a>
+              </form>
+          </div>
+      </div>
+  </div>
+{% endblock %}
+
+{% if messages %}
+            <div class="alert alert-success">
+                <ul>
+                    {% for message in messages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
